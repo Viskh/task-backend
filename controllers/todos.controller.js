@@ -28,7 +28,9 @@ module.exports.todosController = {
         text: req.body.text,
         completed: req.body.completed,
       });
-      res.json("Дело успешно изменено!");
+
+      const todos = await Todo.find(req.params.id)
+      res.json(todos);
     } catch (e) {
       res.json(e.message);
     }
