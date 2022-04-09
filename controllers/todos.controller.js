@@ -29,8 +29,8 @@ module.exports.todosController = {
         completed: req.body.completed,
       });
 
-      const todos = await Todo.find()
-      res.json(todos);
+      const todo = await Todo.findById(req.params.id)
+      res.json(todo);
     } catch (e) {
       res.json(e.message);
     }
