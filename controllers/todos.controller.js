@@ -29,8 +29,7 @@ module.exports.todosController = {
         completed: req.body.completed,
       });
 
-      const todo = await Todo.findById(req.params.id)
-      res.json(todo);
+      res.json('Дело успешно изменено!');
     } catch (e) {
       res.json(e.message);
     }
