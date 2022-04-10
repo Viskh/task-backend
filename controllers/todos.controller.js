@@ -24,12 +24,14 @@ module.exports.todosController = {
 
   updateTodo: async (req, res) => {
     try {
-      await Todo.findByIdAndUpdate(req.params.id, {
+       await Todo.findByIdAndUpdate(req.params.id, {
         text: req.body.text,
         completed: req.body.completed,
       });
 
-      res.json('Дело успешно изменено!');
+      const todo = await Todo.findById(req.params.id)
+
+      res.json(todo);
     } catch (e) {
       res.json(e.message);
     }
