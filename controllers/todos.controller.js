@@ -14,7 +14,7 @@ module.exports.todosController = {
     try {
      const todo = await Todo.create({
         text: req.body.text,
-        completed: false,
+        user: req.body.user,
       });
       res.status(201).json(todo);
     } catch (e) {
