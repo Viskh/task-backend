@@ -10,6 +10,15 @@ module.exports.todosController = {
     }
   },
 
+  getTodosByUser: async (req, res) => {
+    try {
+      const todos = await Todo.find({user: req.params.id})
+      res.json(todos)
+    } catch (e) {
+      res.json(e.message)
+    }
+  },
+
   createTodo: async (req, res) => {
     try {
      const todo = await Todo.create({
