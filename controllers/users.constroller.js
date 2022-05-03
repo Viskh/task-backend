@@ -41,14 +41,14 @@ module.exports.usersController = {
 
       const condidate = await User.findOne({ email });
 
-/*       if (!condidate) {
+      if (!condidate) {
         return res.status(401).json("неверный логин или пароль");
-      } */
+      }
 
       const valid = await bcrypt.compare(password, condidate.password);
-/*       if (!valid) {
+      if (!valid) {
         return res.status(401).json("неверный логин или пароль");
-      } */
+      }
 
       const payload = {
         id: condidate._id,
@@ -63,7 +63,7 @@ module.exports.usersController = {
         id: condidate._id,
       });
     } catch (error) {
-      res.status(401).json(error);
+      res.status(401).json(error.toString());
     }
   },
 };
