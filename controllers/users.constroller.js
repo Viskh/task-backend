@@ -63,7 +63,7 @@ module.exports.usersController = {
         id: condidate._id,
       });
     } catch (error) {
-      res.status(401).json(error.toString());
+      res.status(401).json(error);
     }
   },
 };
