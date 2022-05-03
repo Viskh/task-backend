@@ -41,17 +41,9 @@ module.exports.usersController = {
 
       const condidate = await User.findOne({ email });
 
-      if (!condidate) {
-        return res.status(401).json("неверный логин или пароль");
-      }
-
-      const valid = await bcrypt.compare(password, condidate.password);
-      if (!valid) {
-        return res.status(401).json("неверный логин или пароль");
-      }
-
       const payload = {
         id: condidate._id,
+        password
       };
 
       const token = jwt.sign(payload, process.env.SECRET_JWT_KEY, {
