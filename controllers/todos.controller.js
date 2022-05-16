@@ -12,18 +12,20 @@ module.exports.todosController = {
 
   getTodosByUser: async (req, res) => {
     try {
-      const todos = await Todo.find({user: req.params.id})
-      res.json(todos)
+      const todos = await Todo.find({ user: req.params.id });
+      res.json(todos);
     } catch (e) {
-      res.json(e.message)
+      res.json(e.message);
     }
   },
 
   createTodo: async (req, res) => {
     try {
-     const todo = await Todo.create({
+      const todo = await Todo.create({
+        title: req.body.title,
         text: req.body.text,
         user: req.body.user,
+        category: req.body.category,
       });
       res.status(201).json(todo);
     } catch (e) {
@@ -33,12 +35,16 @@ module.exports.todosController = {
 
   updateTodo: async (req, res) => {
     try {
-       await Todo.findByIdAndUpdate(req.params.id, {
-        text: req.body.text,
-        completed: req.body.completed,
-      });
-
-      const todo = await Todo.findById(req.params.id)
+      const todo = await Todo.findByIdAndUpdate(
+        req.params.id,
+        {
+          title: req.body.title,
+          text: req.body.text,
+          completed: req.body.completed,
+          category: req.body.category
+        },
+        { new: true }
+      );
 
       res.json(todo);
     } catch (e) {

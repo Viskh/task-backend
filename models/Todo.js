@@ -2,6 +2,10 @@ const mongoose = require("mongoose");
 
 const todoSchema = mongoose.Schema(
   {
+    title: {
+      type: String,
+    },
+    
     text: {
       type: String,
       required: true,
@@ -12,9 +16,9 @@ const todoSchema = mongoose.Schema(
       default: false,
     },
 
-    created: {
-      type: Date,
-      default: new Date(),
+    category: {
+      ref: "Category",
+      type: mongoose.SchemaTypes.ObjectId,
     },
 
     user: {
